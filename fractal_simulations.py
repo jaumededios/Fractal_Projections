@@ -35,7 +35,7 @@ class Koch_Snowflake():
 
   # Returns a uniform random point in a random koch
   def random_point(self,key):
-    koch_key = self.koch_key
+    koch_key = self.key
     theta = self.theta
     n = self.n
 
