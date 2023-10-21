@@ -10,7 +10,6 @@ def new_global_key():
 class Koch_Snowflake():
   def __init__(self,theta, n=10):
     self.theta = theta
-    self.key = key
     self.n = n
 
   def affine_transforms(self,theta):
@@ -35,7 +34,6 @@ class Koch_Snowflake():
 
   # Returns a uniform random point in a random koch
   def random_point(self,key):
-    koch_key = self.key
     theta = self.theta
     n = self.n
 
