@@ -7,8 +7,8 @@ def new_global_key():
   return jax.random.PRNGKey(np.random.randint(100000))
 
 
-class Koch_Showflake():
-  def __init__(sekf,key,theta, n=10):
+class Koch_Snowflake():
+  def __init__(self,key,theta, n=10):
     self.theta = theta
     self.key = key
     self.n = n
