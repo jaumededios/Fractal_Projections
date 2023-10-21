@@ -50,7 +50,7 @@ class Koch_Snowflake():
       k,koch_key = jax.random.split(koch_key,2)
       koch_key = jax.random.PRNGKey(jax.random.randint(koch_key, shape=(), 
                                                        minval=0, maxval=10000)+p)
-      fractal_choices.append(
+      fractal_angles.append(
           theta*(-1)**jax.random.randint(k, shape=(), minval=0, maxval=2) 
       )
     
