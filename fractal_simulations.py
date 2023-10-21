@@ -8,7 +8,7 @@ def new_global_key():
 
 
 class Koch_Snowflake():
-  def __init__(self,key,theta, n=10):
+  def __init__(self,theta, n=10):
     self.theta = theta
     self.key = key
     self.n = n
@@ -32,6 +32,36 @@ class Koch_Snowflake():
     num_intervals = 4
     return jnp.log(num_intervals)/jnp.log(scale_ratio)
 
+
+  # Returns a uniform random point in a random koch
+  def random_point(self,key):
+    koch_key = self.key
+    theta = self.theta
+    n = self.n
+
+    x = jnp.array((0,0))
+    #to generate x, we make a list of what of the 4 intervals we pick at each level
+    pos_choices = jax.random.randint(key, shape=(n,), minval=0, maxval=4) 
+    
+    #list of angles
+    fractal_angles = [theta]*n
+    
+    #generate the point by composing the transformations backwards
+    for c,angle in zip(pos_choices[::-1],fractal_angles[::-1]):
+      x = self.affine_transforms(angle)(x)[c]
+
+    #center the fractal
+    theta0 = fractal_angles[0]  
+    x0 = jnp.array(( 1/2,jnp.sin(theta0)/(1+1*jnp.cos(theta0))/4))
+    return x-x0
+
+
+
+class Random_Koch_Snowflake(Koch_Snowflake):
+  def __init__(self,key,theta, n=10):
+    self.theta = theta
+    self.key = key
+    self.n = n
 
   # Returns a uniform random point in a random koch
   def random_point(self,key):
